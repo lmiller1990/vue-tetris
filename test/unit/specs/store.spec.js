@@ -8,11 +8,11 @@ const state = {
   ]
 }
 
-describe('DRAW_BLOCK', () => {
+describe('CREATE_BLOCK', () => {
   it('should draw a straight line block', () => {
-    const { DRAW_BLOCK } = mutations
+    const { CREATE_BLOCK } = mutations
 
-    DRAW_BLOCK(state, [
+    CREATE_BLOCK(state, [
       [0, 0],
       [0, 1],
       [0, 2]

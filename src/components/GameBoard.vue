@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="line" v-for="line in board"> 
-      <div class="tile" v-for="tile in line">
+      <div :class="[tile == 1 ? 'filled tile' : 'empty tile' ]" v-for="tile in line">
 
       </div>
     </div>
@@ -13,7 +13,12 @@
 
   export default {
     created () {
+      let block = [[1, 1, 1], [0, 0, 0], [0, 0, 0]]
       this.$store.commit('SETUP_BOARD', this.createArray(15, 10))
+      this.$store.commit('CREATE_BLOCK', block)
+      this.$store.commit('SET_CURRENT_BLOCK', block)
+
+      setInterval(this.$store.commit('LOWER_CURRENT_BLOCK'), 1000)
     },
     methods: {
       createArray (length) {
@@ -46,4 +51,9 @@
     border: 0.125em solid grey;
     margin-left: 0.125em;
   }
+
+  .filled {
+    background-color: grey;
+  }
+
 </style>
