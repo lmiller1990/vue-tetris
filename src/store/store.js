@@ -8,9 +8,14 @@ const state = {
   msg: 'Tetris'
 }
 
-const mutations = {
+export const mutations = {
   SETUP_BOARD (state, gameBoard) {
     state.board = gameBoard
+  },
+  DRAW_BLOCK (state, tiles) {
+    for (let t in tiles) {
+      state.board[tiles[t][0]][tiles[t][1]] = 1
+    }
   }
 }
 
