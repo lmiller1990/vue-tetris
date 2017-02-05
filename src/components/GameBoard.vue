@@ -2,7 +2,7 @@
   <div>
     <div class="line" v-for="line in board"> 
       <div :class="[tile == 1 ? 'filled tile' : 'empty tile' ]" v-for="tile in line">
-
+        {{ tile }}
       </div>
     </div>
   </div>
@@ -13,14 +13,19 @@
 
   export default {
     created () {
-      let block = [[1, 1, 1], [0, 0, 0], [0, 0, 0]]
+      let block = [ [1, 0], [1, 1], [1, 2] ]
       this.$store.commit('SETUP_BOARD', this.createArray(15, 10))
       this.$store.commit('CREATE_BLOCK', block)
       this.$store.commit('SET_CURRENT_BLOCK', block)
+      this.$store.commit('LOWER_CURRENT_BLOCK')
 
-      setInterval(this.$store.commit('LOWER_CURRENT_BLOCK'), 1000)
+      setInterval(this.lower, 1000)
     },
     methods: {
+      lower () {
+        console.log('Lowering...')
+        this.$store.commit('LOWER_CURRENT_BLOCK')
+      },
       createArray (length) {
         let arr = new Array(length || 0).fill(0)
         let i = length
