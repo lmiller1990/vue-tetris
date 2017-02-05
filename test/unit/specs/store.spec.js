@@ -4,8 +4,6 @@ describe('CREATE_BLOCK', () => {
   it('should draw a straight line block', () => {
     let state = {
       board: [
-        [ 0, 0, 0 ],
-        [ 0, 0, 0 ],
         [ 0, 0, 0 ]
       ]
     }
@@ -19,9 +17,7 @@ describe('CREATE_BLOCK', () => {
 
     expect(state.board).to.eql(
       [
-        [1, 1, 1],
-        [0, 0, 0],
-        [0, 0, 0]
+        [1, 1, 1]
       ]
     )
   })
@@ -32,7 +28,6 @@ describe('LOWER_CURRENT_BLOCK', () => {
     let state = {
       board: [
         [ 0, 0, 0 ],
-        [ 0, 0, 0 ],
         [ 0, 0, 0 ]
       ]
     }
@@ -40,7 +35,6 @@ describe('LOWER_CURRENT_BLOCK', () => {
     const { LOWER_CURRENT_BLOCK } = mutations
     const { SET_CURRENT_BLOCK } = mutations
     const { CREATE_BLOCK } = mutations
-    
     CREATE_BLOCK(state, block)
     SET_CURRENT_BLOCK(state, block)
 
@@ -48,8 +42,15 @@ describe('LOWER_CURRENT_BLOCK', () => {
 
     expect(state.board).to.eql([
       [0, 0, 0],
-      [1, 1, 1],
-      [0, 0, 0]
+      [1, 1, 1]
     ])
+
+    LOWER_CURRENT_BLOCK(state)
+
+    expect(state.board).to.eql([
+      [0, 0, 0],
+      [1, 1, 1]
+    ])
+
   })
 })

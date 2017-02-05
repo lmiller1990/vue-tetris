@@ -22,17 +22,19 @@ export const mutations = {
   },
   LOWER_CURRENT_BLOCK (state) {
     let updatedCurrentBlock = []
-    for (let t in state.currentBlock) {
-      let oldY = state.currentBlock[t][0]
-      let newY = state.currentBlock[t][0] + 1
-      let oldX = state.currentBlock[t][1]
+    if (state.currentBlock[0][0] < state.board.length - 1) {
+      for (let t in state.currentBlock) {
+        let oldY = state.currentBlock[t][0]
+        let newY = state.currentBlock[t][0] + 1
+        let oldX = state.currentBlock[t][1]
 
-      state.board[oldY].splice(oldX, 1, 0)
-      state.board[newY].splice(oldX, 1, 1)
+        state.board[oldY].splice(oldX, 1, 0)
+        state.board[newY].splice(oldX, 1, 1)
 
-      updatedCurrentBlock.push([newY, oldX])
+        updatedCurrentBlock.push([newY, oldX])
+      }
+      state.currentBlock = updatedCurrentBlock
     }
-    state.currentBlock = updatedCurrentBlock
   }
 }
 
