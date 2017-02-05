@@ -51,6 +51,11 @@ describe('LOWER_CURRENT_BLOCK', () => {
       [0, 0, 0],
       [1, 1, 1]
     ])
+  })
+})
 
+describe('MOVE_CURRENT_BLOCK', () => {
+  it('should move the block left or right', () => {
+    let state = {  }
   })
 })

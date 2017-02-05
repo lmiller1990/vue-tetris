@@ -20,6 +20,9 @@ export const mutations = {
   SET_CURRENT_BLOCK (state, block) {
     state.currentBlock = block
   },
+  MOVE_CURRENT_BLOCK (state, direction) {
+
+  },
   LOWER_CURRENT_BLOCK (state) {
     let updatedCurrentBlock = []
     if (state.currentBlock[0][0] < state.board.length - 1) {

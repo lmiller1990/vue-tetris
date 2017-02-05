@@ -20,7 +20,12 @@ export default {
   },
   methods: {
     moveBlock (event) {
-      console.log('Moving', event)
+      if (event.code === 'ArrowLeft') {
+        console.log('Left arrow pressed.')
+      }
+      if (event.code === 'ArrowRight') {
+        console.log('Right arrow pressed.')
+      }
     }
   }
 }
