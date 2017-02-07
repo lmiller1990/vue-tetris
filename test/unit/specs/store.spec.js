@@ -55,7 +55,23 @@ describe('LOWER_CURRENT_BLOCK', () => {
 })
 
 describe('MOVE_CURRENT_BLOCK', () => {
-  it('should move the block left or right', () => {
-    let state = {  }
+  it('moves the block one space to the right', () => {
+    let state = {
+      board: [
+        [ 0, 0, 0 ]
+      ]
+    }
+    let block = [ [0, 0], [0, 1] ]
+    const { MOVE_CURRENT_BLOCK } = mutations
+    const { SET_CURRENT_BLOCK } = mutations
+    const { CREATE_BLOCK } = mutations
+    CREATE_BLOCK(state, block)
+    SET_CURRENT_BLOCK(state, block)
+
+    MOVE_CURRENT_BLOCK(state, 'right')
+
+    expect(state.board).to.eql([
+      [0, 1, 1]
+    ])
   })
 })

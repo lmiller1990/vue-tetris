@@ -21,7 +21,21 @@ export const mutations = {
     state.currentBlock = block
   },
   MOVE_CURRENT_BLOCK (state, direction) {
+    if (direction === 'right') {
+      let updatedCurrentBlock = []
+      for (let t in state.currentBlock) {
+        let oldY = state.currentBlock[t][0]
+        let oldX = state.currentBlock[t][1]
+        let newX = state.currentBlock[t][1] + 1
 
+        console.log(`old y${oldY}, old x ${oldX} new x ${newX}`)
+        state.board[oldX].splice(oldX, 1, 0)
+        state.board[newX].splice(oldX, 1, 1)
+        
+        updatedCurrentBlock.push([oldY, newX])
+      }
+      state.currentBlock = updatedCurrentBlock
+    }
   },
   LOWER_CURRENT_BLOCK (state) {
     let updatedCurrentBlock = []
