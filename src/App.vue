@@ -25,6 +25,7 @@ export default {
       }
       if (event.code === 'ArrowRight') {
         console.log('Right arrow pressed.')
+        this.$store.commit('MOVE_CURRENT_BLOCK', 'right')
       }
     }
   }
