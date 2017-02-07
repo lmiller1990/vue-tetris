@@ -28,9 +28,12 @@ export const mutations = {
         let oldX = state.currentBlock[t][1]
         let newX = state.currentBlock[t][1] + 1
 
-        console.log(`old y${oldY}, old x ${oldX} new x ${newX}`)
-        state.board[oldX].splice(oldX, 1, 0)
-        state.board[newX].splice(oldX, 1, 1)
+        console.log(`Block [${oldY}, ${oldX}] should become [${oldY}, ${newX}]`)
+
+        state.board[oldY].splice(oldX, 1, 0)
+        state.board[oldY].splice(newX, 1, 1)
+
+        console.log('Now', state.board)
         
         updatedCurrentBlock.push([oldY, newX])
       }
