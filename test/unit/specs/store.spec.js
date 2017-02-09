@@ -73,6 +73,12 @@ describe('MOVE_CURRENT_BLOCK', () => {
     expect(state.board).to.eql([
       [0, 1, 1]
     ])
+
+    MOVE_CURRENT_BLOCK(state, 'right')
+
+    expect(state.board).to.eql([
+      [0, 1, 1]
+    ])
   })
 
   it('moves the block one space to the left', () => {
@@ -87,6 +93,12 @@ describe('MOVE_CURRENT_BLOCK', () => {
     const { CREATE_BLOCK } = mutations
     CREATE_BLOCK(state, block)
     SET_CURRENT_BLOCK(state, block)
+
+    MOVE_CURRENT_BLOCK(state, 'left')
+
+    expect(state.board).to.eql([
+      [1, 1, 0]
+    ])
 
     MOVE_CURRENT_BLOCK(state, 'left')
 

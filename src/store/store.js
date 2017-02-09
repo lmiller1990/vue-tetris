@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { atEdge } from './storeHelpers'
 
 Vue.use(Vuex)
 
@@ -21,6 +22,9 @@ export const mutations = {
     state.currentBlock = block
   },
   MOVE_CURRENT_BLOCK (state, direction) {
+    if (atEdge(direction, state.board[0].length, state.currentBlock)) {
+      return
+    }
     let toFill = []
     let updatedCurrentBlock = []
     for (let t in state.currentBlock) {
