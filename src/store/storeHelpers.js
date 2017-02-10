@@ -15,4 +15,10 @@ function atEdge (direction, boardWidth, currentBlock) {
   return false
 }
 
-export { atEdge }
+function atBottom (board, currentBlock) {
+  if (currentBlock[0][0] < board.length - 1) {
+    return true
+  }
+  return false
+}
+export { atEdge, atBottom }
