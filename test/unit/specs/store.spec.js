@@ -31,25 +31,28 @@ describe('LOWER_CURRENT_BLOCK', () => {
   it('should lower the block by one row', () => {
     let state = {
       board: [
-        [ 0, 0, 0 ],
-        [ 0, 0, 0 ]
+        [ 0, 0 ],
+        [ 0, 0 ],
+        [ 0, 0 ]
       ]
     }
-    let block = [ [0, 0], [0, 1], [0, 2] ]
+    let block = [ [0, 0], [0, 1], [1, 0], [1, 1] ]
     CREATE_BLOCK(state, block)
     SET_CURRENT_BLOCK(state, block)
     LOWER_CURRENT_BLOCK(state)
 
     expect(state.board).to.eql([
-      [0, 0, 0],
-      [1, 1, 1]
+      [ 0, 0 ],
+      [ 1, 1 ],
+      [ 1, 1 ]
     ])
 
     LOWER_CURRENT_BLOCK(state)
 
     expect(state.board).to.eql([
-      [0, 0, 0],
-      [1, 1, 1]
+      [ 0, 0 ],
+      [ 1, 1 ],
+      [ 1, 1 ]
     ])
   })
 

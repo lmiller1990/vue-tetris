@@ -1,6 +1,11 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { atEdge, atBottom, onAnotherBlock } from './storeHelpers'
+import { atEdge,
+  atBottom,
+  onAnotherBlock,
+  occupiedByCurrentBlock,
+  indOf
+} from './storeHelpers'
 
 Vue.use(Vuex)
 
@@ -52,6 +57,7 @@ export const mutations = {
     state.currentBlock = updatedCurrentBlock
   },
   LOWER_CURRENT_BLOCK (state) {
+    let movedTo = []
     let updatedCurrentBlock = []
     if (!atBottom(state.board, state.currentBlock) &&
       !onAnotherBlock(state.board, state.currentBlock)) {
@@ -60,21 +66,20 @@ export const mutations = {
         let newY = state.currentBlock[t][0] + 1
         let oldX = state.currentBlock[t][1]
 
-        state.board[oldY].splice(oldX, 1, 0)
-        state.board[newY].splice(oldX, 1, 1)
+        if (!occupiedByCurrentBlock([newY, oldX], state.currentBlock)) {
+        }
 
+        if (indOf([oldY, oldX], movedTo) === -1) {
+          state.board[oldY].splice(oldX, 1, 0)
+        }
+
+        state.board[newY].splice(oldX, 1, 1)
+        movedTo.push([newY, oldX])
         updatedCurrentBlock.push([newY, oldX])
       }
       state.currentBlock = updatedCurrentBlock
     } else {
       state.shouldCreateNextBlock = true
-      // create a new block
-      /* let tiles = [ [1, 0], [1, 1], [1, 2] ]
-
-      for (let t in tiles) {
-        state.board[tiles[t][0]][tiles[t][1]] = 1
-      }
-      state.currentBlock = tiles */
     }
   }
 }
