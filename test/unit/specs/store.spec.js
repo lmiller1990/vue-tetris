@@ -57,8 +57,8 @@ describe('LOWER_CURRENT_BLOCK', () => {
     let block = [ [0, 0] ]
     let state = {
       board: [
-        [ 0, 0 ],
-        [ 1, 0 ]
+        [ 0 ],
+        [ 1 ]
       ],
       currentBlock: null
     }
@@ -67,8 +67,8 @@ describe('LOWER_CURRENT_BLOCK', () => {
     LOWER_CURRENT_BLOCK(state)
 
     expect(state.board).to.eql([
-      [ 1, 0 ],
-      [ 1, 0 ]
+      [ 1 ],
+      [ 1 ]
     ])
   })
 })
