@@ -17,8 +17,19 @@ function atEdge (direction, boardWidth, currentBlock) {
 
 function atBottom (board, currentBlock) {
   if (currentBlock[0][0] < board.length - 1) {
-    return true
+    return false
+  }
+  return true
+}
+
+function onAnotherBlock (board, currentBlock) {
+  let curr = currentBlock
+  for (let c in curr) {
+    if (board[curr[c][0] + 1][0] === 1) {
+      return true
+    }
   }
   return false
 }
-export { atEdge, atBottom }
+
+export { atEdge, atBottom, onAnotherBlock }

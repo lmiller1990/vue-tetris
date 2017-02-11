@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { atEdge, atBottom } from './storeHelpers'
+import { atEdge, atBottom, onAnotherBlock } from './storeHelpers'
 
 Vue.use(Vuex)
 
@@ -51,7 +51,8 @@ export const mutations = {
   },
   LOWER_CURRENT_BLOCK (state) {
     let updatedCurrentBlock = []
-    if (atBottom(state.board, state.currentBlock)) {
+    if (!atBottom(state.board, state.currentBlock) &&
+        !onAnotherBlock(state.board, state.currentBlock)) {
       for (let t in state.currentBlock) {
         let oldY = state.currentBlock[t][0]
         let newY = state.currentBlock[t][0] + 1
