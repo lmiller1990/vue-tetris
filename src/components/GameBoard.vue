@@ -2,7 +2,6 @@
   <div>
     <div class="line" v-for="line in board"> 
       <div :class="[tile == 1 ? 'filled tile' : 'empty tile' ]" v-for="tile in line">
-        {{ tile }}
       </div>
     </div>
   </div>
@@ -17,13 +16,16 @@
       this.$store.commit('SETUP_BOARD', this.createArray(15, 10))
       this.$store.commit('CREATE_BLOCK', block)
       this.$store.commit('SET_CURRENT_BLOCK', block)
-      this.$store.commit('LOWER_CURRENT_BLOCK')
 
       setInterval(this.lower, 1000)
     },
     methods: {
       lower () {
-        console.log('Lowering...')
+        if (this.$store.state.shouldCreateNextBlock) {
+          let block = [ [1, 0], [1, 1], [1, 2] ]
+          this.$store.commit('CREATE_BLOCK', block)
+          this.$store.commit('SET_CURRENT_BLOCK', block)
+        }
         this.$store.commit('LOWER_CURRENT_BLOCK')
       },
       createArray (length) {
@@ -46,9 +48,6 @@
 </script>
 
 <style scoped>
-  .line {
-  } 
-
   .tile {
     display: inline-block;
     width: 1.5em;

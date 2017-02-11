@@ -6,7 +6,8 @@ Vue.use(Vuex)
 
 const state = {
   board: [],
-  currentBlock: []
+  currentBlock: [],
+  shouldCreateNextBlock: true
 }
 
 export const mutations = {
@@ -16,6 +17,7 @@ export const mutations = {
   CREATE_BLOCK (state, tiles) {
     for (let t in tiles) {
       state.board[tiles[t][0]][tiles[t][1]] = 1
+      state.shouldCreateNextBlock = false
     }
   },
   SET_CURRENT_BLOCK (state, block) {
@@ -52,7 +54,7 @@ export const mutations = {
   LOWER_CURRENT_BLOCK (state) {
     let updatedCurrentBlock = []
     if (!atBottom(state.board, state.currentBlock) &&
-        !onAnotherBlock(state.board, state.currentBlock)) {
+      !onAnotherBlock(state.board, state.currentBlock)) {
       for (let t in state.currentBlock) {
         let oldY = state.currentBlock[t][0]
         let newY = state.currentBlock[t][0] + 1
@@ -64,6 +66,15 @@ export const mutations = {
         updatedCurrentBlock.push([newY, oldX])
       }
       state.currentBlock = updatedCurrentBlock
+    } else {
+      state.shouldCreateNextBlock = true
+      // create a new block
+      /* let tiles = [ [1, 0], [1, 1], [1, 2] ]
+
+      for (let t in tiles) {
+        state.board[tiles[t][0]][tiles[t][1]] = 1
+      }
+      state.currentBlock = tiles */
     }
   }
 }

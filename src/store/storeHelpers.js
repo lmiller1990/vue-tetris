@@ -25,7 +25,7 @@ function atBottom (board, currentBlock) {
 function onAnotherBlock (board, currentBlock) {
   let curr = currentBlock
   for (let c in curr) {
-    if (board[curr[c][0] + 1][0] === 1) {
+    if (board[curr[c][0] + 1][curr[c][1]] === 1) {
       return true
     }
   }

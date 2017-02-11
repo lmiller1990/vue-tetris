@@ -54,21 +54,21 @@ describe('LOWER_CURRENT_BLOCK', () => {
   })
 
   it('should not be lowered if sitting on another block', () => {
+    let block = [ [0, 0] ]
     let state = {
       board: [
-        [ 0 ],
-        [ 1 ]
-      ]
+        [ 0, 0 ],
+        [ 1, 0 ]
+      ],
+      currentBlock: null
     }
-    let block = [ [0, 0] ]
-
     CREATE_BLOCK(state, block)
     SET_CURRENT_BLOCK(state, block)
     LOWER_CURRENT_BLOCK(state)
 
     expect(state.board).to.eql([
-      [ 1 ],
-      [ 1 ]
+      [ 1, 0 ],
+      [ 1, 0 ]
     ])
   })
 })
