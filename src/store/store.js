@@ -32,19 +32,29 @@ export const mutations = {
   },
   ROTATE_CURRENT_BLOCK (state) {
     if (canRotate(state.currentBlock, state.board)) {
-      console.log('Rotating')
       let curr = state.currentBlock.rotations[state.currentBlock.rotIndex]
-      let next = state.currentBlock.rotations[state.currentBlock.rotIndex + 1]
+      let next = 0
+      if (state.currentBlock.rotIndex < 3) {
+        next = state.currentBlock.rotations[state.currentBlock.rotIndex + 1]
+      } else {
+        next = state.currentBlock.rotations[0]
+      }
 
       for (let c in curr) {
         // splice all current
         state.board[curr[c][0]].splice(curr[c][1], 1, 0)
       }
       for (let n in next) {
-        // splice all current
+        // add all new rotation
         state.board[next[n][0]].splice(next[n][1], 1, 1)
       }
-      state.currentBlock.rotIndex += 1
+
+      if (state.currentBlock.rotIndex < 3) {
+        state.currentBlock.rotIndex += 1
+      } else {
+        state.currentBlock.rotIndex = 0
+      }
+      console.log(`Current rotation index is ${state.currentBlock.rotIndex}`)
     }
   },
   MOVE_CURRENT_BLOCK (state, direction) {
@@ -75,12 +85,26 @@ export const mutations = {
         updatedCurrentBlock.push([oldY, newX])
       }
       state.currentBlock.rotations[state.currentBlock.rotIndex] = updatedCurrentBlock
+
+      let rot = state.currentBlock.rotIndex
+      for (let r in state.currentBlock.rotations) {
+        if (parseInt(r) !== parseInt(rot)) {
+          for (let b in state.currentBlock.rotations[r]) {
+            if (direction === 'right') {
+              state.currentBlock.rotations[r][b][1] += 1
+            } else {
+              state.currentBlock.rotations[r][b][1] -= 1
+            }
+          }
+        }
+      }
     }
   },
   LOWER_CURRENT_BLOCK (state) {
     let movedTo = []
     let updatedCurrentBlock = []
     let curr = state.currentBlock.rotations[state.currentBlock.rotIndex]
+
     if (!atBottom(state.board, state.currentBlock) &&
       !onAnotherBlock(state.board, state.currentBlock)) {
       for (let t in curr) {
@@ -98,14 +122,10 @@ export const mutations = {
       }
       state.currentBlock.rotations[state.currentBlock.rotIndex] = updatedCurrentBlock
       let rot = state.currentBlock.rotIndex
-      console.log(`Current rotation index is ${state.currentBlock.rotIndex}`)
       for (let r in state.currentBlock.rotations) {
         if (parseInt(r) !== parseInt(rot)) {
-          console.log(`Update ${r}`)
           for (let b in state.currentBlock.rotations[r]) {
-            console.log(`Incrementing ${state.currentBlock.rotations[r][b]}`)
             state.currentBlock.rotations[r][b][0] += 1
-            b + 1 - 1
           }
         }
       }
