@@ -3,16 +3,16 @@ import Vuex from 'vuex'
 import { atEdge,
   atBottom,
   onAnotherBlock,
-  occupiedByCurrentBlock,
   indOf,
-  canMove
+  canMove,
+  canRotate
 } from './storeHelpers'
 
 Vue.use(Vuex)
 
 const state = {
   board: [],
-  currentBlock: [],
+  currentBlock: { },
   shouldCreateNextBlock: true
 }
 
@@ -20,31 +20,49 @@ export const mutations = {
   SETUP_BOARD (state, gameBoard) {
     state.board = gameBoard
   },
-  CREATE_BLOCK (state, tiles) {
-    for (let t in tiles) {
-      state.board[tiles[t][0]][tiles[t][1]] = 1
+  CREATE_BLOCK (state, block) {
+    let rot = block.rotations[block.rotIndex]
+    for (let t in rot) {
+      state.board[rot[t][0]][rot[t][1]] = 1
       state.shouldCreateNextBlock = false
     }
   },
   SET_CURRENT_BLOCK (state, block) {
     state.currentBlock = block
   },
+  ROTATE_CURRENT_BLOCK (state) {
+    if (canRotate(state.currentBlock, state.board)) {
+      console.log('Rotating')
+      let curr = state.currentBlock.rotations[state.currentBlock.rotIndex]
+      let next = state.currentBlock.rotations[state.currentBlock.rotIndex + 1]
+
+      for (let c in curr) {
+        // splice all current
+        state.board[curr[c][0]].splice(curr[c][1], 1, 0)
+      }
+      for (let n in next) {
+        // splice all current
+        state.board[next[n][0]].splice(next[n][1], 1, 1)
+      }
+    }
+  },
   MOVE_CURRENT_BLOCK (state, direction) {
-    if (atEdge(direction, state.board[0].length, state.currentBlock)) {
+    let curr = state.currentBlock.rotations[state.currentBlock.rotIndex]
+    if (atEdge(direction, state.board[0].length, curr)) {
       return
     }
-    if (canMove(direction, state.board, state.currentBlock)) {
+    if (canMove(direction, state.board, curr)) {
       let updatedCurrentBlock = []
       let movedTo = []
 
-      for (let t in state.currentBlock) {
-        let oldY = state.currentBlock[t][0]
-        let oldX = state.currentBlock[t][1]
+      for (let t in curr) {
+        let oldY = curr[t][0]
+        let oldX = curr[t][1]
         let newX = 0
         if (direction === 'right') {
-          newX = state.currentBlock[t][1] + 1
+          newX = curr[t][1] + 1
         } else {
-          newX = state.currentBlock[t][1] - 1
+          newX = curr[t][1] - 1
         }
 
         if (indOf([oldY, oldX], movedTo) === -1) {
@@ -55,21 +73,22 @@ export const mutations = {
         movedTo.push([oldY, newX])
         updatedCurrentBlock.push([oldY, newX])
       }
-      state.currentBlock = updatedCurrentBlock
+      state.currentBlock.rotations[state.currentBlock.rotIndex] = updatedCurrentBlock
     }
   },
   LOWER_CURRENT_BLOCK (state) {
     let movedTo = []
     let updatedCurrentBlock = []
+    let curr = state.currentBlock.rotations[state.currentBlock.rotIndex]
     if (!atBottom(state.board, state.currentBlock) &&
       !onAnotherBlock(state.board, state.currentBlock)) {
-      for (let t in state.currentBlock) {
-        let oldY = state.currentBlock[t][0]
-        let newY = state.currentBlock[t][0] + 1
-        let oldX = state.currentBlock[t][1]
+      for (let t in curr) {
+        let oldY = curr[t][0]
+        let newY = curr[t][0] + 1
+        let oldX = curr[t][1]
 
-        if (!occupiedByCurrentBlock([newY, oldX], state.currentBlock)) {
-        }
+        /* if (!occupiedByCurrentBlock([newY, oldX], state.currentBlock)) {
+        } */
 
         if (indOf([oldY, oldX], movedTo) === -1) {
           state.board[oldY].splice(oldX, 1, 0)
@@ -79,7 +98,7 @@ export const mutations = {
         movedTo.push([newY, oldX])
         updatedCurrentBlock.push([newY, oldX])
       }
-      state.currentBlock = updatedCurrentBlock
+      state.currentBlock.rotations[state.currentBlock.rotIndex] = updatedCurrentBlock
     } else {
       state.shouldCreateNextBlock = true
     }

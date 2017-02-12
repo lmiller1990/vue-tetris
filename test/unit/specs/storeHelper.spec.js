@@ -6,10 +6,15 @@ describe('onAnotherBlock', () => {
       [0, 0, 0],
       [1, 1, 0]
     ]
-    let currentBlock = [
-      [ 0, 1 ],
-      [ 0, 2 ]
-    ]
+    let currentBlock = {
+      rotIndex: 0,
+      rotations: [
+        [
+          [ 0, 1 ],
+          [ 0, 2 ]
+        ]
+      ]
+    }
 
     expect(helpers.onAnotherBlock(board, currentBlock)).to.equal(true)
   })

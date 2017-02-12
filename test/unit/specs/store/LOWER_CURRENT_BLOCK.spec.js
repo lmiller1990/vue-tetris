@@ -15,7 +15,17 @@ describe('LOWER_CURRENT_BLOCK', () => {
         [ 0, 0 ]
       ]
     }
-    let block = [ [0, 0], [0, 1], [1, 0], [1, 1] ]
+    let block = {
+      rotIndex: 0,
+      rotations: [
+        [
+          [0, 0],
+          [0, 1],
+          [1, 0],
+          [1, 1]
+        ]
+      ]
+    }
     CREATE_BLOCK(state, block)
     SET_CURRENT_BLOCK(state, block)
     LOWER_CURRENT_BLOCK(state)
@@ -43,12 +53,17 @@ describe('LOWER_CURRENT_BLOCK', () => {
         [ 0, 0 ]
       ]
     }
-    let block = [
-      [ 0, 1 ],
-      [ 1, 0 ],
-      [ 1, 1 ],
-      [ 2, 0 ]
-    ]
+    let block = {
+      rotIndex: 0,
+      rotations: [
+        [
+          [ 0, 1 ],
+          [ 1, 0 ],
+          [ 1, 1 ],
+          [ 2, 0 ]
+        ]
+      ]
+    }
     CREATE_BLOCK(state, block)
     SET_CURRENT_BLOCK(state, block)
     LOWER_CURRENT_BLOCK(state)
@@ -61,7 +76,14 @@ describe('LOWER_CURRENT_BLOCK', () => {
   })
 
   it('should not be lowered if sitting on another block', () => {
-    let block = [ [0, 0] ]
+    let block = {
+      rotIndex: 0,
+      rotations: [
+        [
+          [0, 0]
+        ]
+      ]
+    }
     let state = {
       board: [
         [ 0 ],

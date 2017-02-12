@@ -28,6 +28,9 @@ export default {
         console.log('Right arrow pressed.')
         this.$store.commit('MOVE_CURRENT_BLOCK', 'right')
       }
+      if (event.code === 'ArrowUp') {
+        this.$store.commit('ROTATE_CURRENT_BLOCK')
+      }
     }
   }
 }

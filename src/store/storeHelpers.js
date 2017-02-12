@@ -15,6 +15,10 @@ function atEdge (direction, boardWidth, currentBlock) {
   return false
 }
 
+function canRotate (curr, board) {
+  return true
+}
+
 function canMove (direction, board, currentBlock) {
   if (direction === 'right') {
     let curr = getRightmostPoints(currentBlock)
@@ -39,7 +43,7 @@ function canMove (direction, board, currentBlock) {
 }
 
 function atBottom (board, currentBlock) {
-  let curr = getBlockLowestPoints(currentBlock)
+  let curr = getBlockLowestPoints(currentBlock.rotations[currentBlock.rotIndex])
   for (let c in curr) {
     if (curr[c][0] < board.length - 1) {
       // do nothing
@@ -51,7 +55,7 @@ function atBottom (board, currentBlock) {
 }
 
 function onAnotherBlock (board, currentBlock) {
-  let curr = getBlockLowestPoints(currentBlock)
+  let curr = getBlockLowestPoints(currentBlock.rotations[currentBlock.rotIndex])
   for (let c in curr) {
     if (board[curr[c][0] + 1][curr[c][1]] === 1) {
       return true
@@ -145,5 +149,6 @@ export { atEdge,
   getBlockLowestPoints,
   occupiedByCurrentBlock,
   indOf,
-  canMove
+  canMove,
+  canRotate
 }

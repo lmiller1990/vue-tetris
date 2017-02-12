@@ -14,12 +14,17 @@ describe('MOVE_CURRENT_BLOCK', () => {
         [ 0, 0, 0, 1 ]
       ]
     }
-    let block = [
-      [ 0, 0 ],
-      [ 1, 0 ],
-      [ 1, 1 ],
-      [ 2, 1 ]
-    ]
+    let block = {
+      rotIndex: 0,
+      rotations: [
+        [
+          [ 0, 0 ],
+          [ 1, 0 ],
+          [ 1, 1 ],
+          [ 2, 1 ]
+        ]
+      ]
+    }
     CREATE_BLOCK(state, block)
     SET_CURRENT_BLOCK(state, block)
     MOVE_CURRENT_BLOCK(state, 'right')
@@ -47,12 +52,17 @@ describe('MOVE_CURRENT_BLOCK', () => {
         [ 0, 0, 1 ]
       ]
     }
-    let block = [
-      [ 0, 0 ],
-      [ 1, 0 ],
-      [ 1, 1 ],
-      [ 2, 1 ]
-    ]
+    let block = {
+      rotIndex: 0,
+      rotations: [
+        [
+          [ 0, 0 ],
+          [ 1, 0 ],
+          [ 1, 1 ],
+          [ 2, 1 ]
+        ]
+      ]
+    }
     CREATE_BLOCK(state, block)
     SET_CURRENT_BLOCK(state, block)
     MOVE_CURRENT_BLOCK(state, 'right')
@@ -70,8 +80,14 @@ describe('MOVE_CURRENT_BLOCK', () => {
         [ 0, 0, 0 ]
       ]
     }
-    let block = [ [0, 0], [0, 1] ]
-
+    let block = {
+      rotIndex: 0,
+      rotations: [
+        [
+          [0, 0], [0, 1]
+        ]
+      ]
+    }
     CREATE_BLOCK(state, block)
     SET_CURRENT_BLOCK(state, block)
     MOVE_CURRENT_BLOCK(state, 'right')
@@ -93,7 +109,14 @@ describe('MOVE_CURRENT_BLOCK', () => {
         [ 0, 0, 0 ]
       ]
     }
-    let block = [ [0, 1], [0, 2] ]
+    let block = {
+      rotIndex: 0,
+      rotations: [
+        [
+          [0, 1], [0, 2]
+        ]
+      ]
+    }
 
     CREATE_BLOCK(state, block)
     SET_CURRENT_BLOCK(state, block)

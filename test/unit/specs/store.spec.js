@@ -11,11 +11,17 @@ describe('CREATE_BLOCK', () => {
         [ 0, 0, 0 ]
       ]
     }
-    CREATE_BLOCK(state, [
-      [0, 0],
-      [0, 1],
-      [0, 2]
-    ])
+    let block = {
+      rotIndex: 0,
+      rotations: [
+        [
+          [0, 0],
+          [0, 1],
+          [0, 2]
+        ]
+      ]
+    }
+    CREATE_BLOCK(state, block)
 
     expect(state.board).to.eql(
       [
