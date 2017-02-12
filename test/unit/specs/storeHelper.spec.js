@@ -15,6 +15,39 @@ describe('onAnotherBlock', () => {
   })
 })
 
+describe('canMove', () => {
+  it('allows a Z block to right', () => {
+    let board = [
+        [ 0, 0, 0, 0 ],
+        [ 0, 0, 0, 0 ],
+        [ 0, 0, 0, 1 ]
+      ]
+    let block = [
+      [ 0, 0 ],
+      [ 1, 0 ],
+      [ 1, 1 ],
+      [ 2, 1 ]
+    ]
+
+    expect(helpers.canMove('right', board, block)).to.equal(true)
+  })
+  it('disallows a Z block to right', () => {
+    let board = [
+        [ 0, 0, 0, 0 ],
+        [ 0, 0, 0, 0 ],
+        [ 0, 0, 0, 1 ]
+      ]
+    let block = [
+      [ 0, 1 ],
+      [ 1, 1 ],
+      [ 1, 2 ],
+      [ 2, 2 ]
+    ]
+
+    expect(helpers.canMove('right', board, block)).to.equal(false)
+  })
+})
+
 describe('getBlockLowestPoints', () => {
   it('gets the lowest points of a block', () => {
     let block = [

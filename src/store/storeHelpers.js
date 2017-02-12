@@ -15,6 +15,28 @@ function atEdge (direction, boardWidth, currentBlock) {
   return false
 }
 
+function canMove (direction, board, curr) {
+  if (direction === 'right') {
+    for (let c in curr) {
+      if (board[curr[c][0]][curr[c][1] + 1] === 0) {
+        // nothing
+      } else {
+        return false
+      }
+    }
+  } else {
+    // left
+    for (let c in curr) {
+      if (board[curr[c][0]][curr[c][1] - 1 === 0]) {
+        // nothing
+      } else {
+        return false
+      }
+    }
+  }
+  return true
+}
+
 function atBottom (board, currentBlock) {
   let curr = getBlockLowestPoints(currentBlock)
   for (let c in curr) {
@@ -81,5 +103,6 @@ export { atEdge,
   onAnotherBlock,
   getBlockLowestPoints,
   occupiedByCurrentBlock,
-  indOf
+  indOf,
+  canMove
 }

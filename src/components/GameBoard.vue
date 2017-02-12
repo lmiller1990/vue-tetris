@@ -13,7 +13,8 @@
 
   export default {
     created () {
-      let block = blocks[5]
+      console.log(this.randomBlockNumber())
+      let block = blocks[this.randomBlockNumber()]
       this.$store.commit('SETUP_BOARD', this.createArray(15, 10))
       this.$store.commit('CREATE_BLOCK', block)
       this.$store.commit('SET_CURRENT_BLOCK', block)
@@ -23,8 +24,7 @@
     methods: {
       lower () {
         if (this.$store.state.shouldCreateNextBlock) {
-          // let block = [ [1, 0], [1, 1], [1, 2] ]
-          let block = blocks[5]
+          let block = blocks[this.randomBlockNumber()]
           this.$store.commit('CREATE_BLOCK', block)
           this.$store.commit('SET_CURRENT_BLOCK', block)
         }
@@ -39,6 +39,9 @@
           while (i--) arr[length - 1 - i] = this.createArray.apply(this, args)
         }
         return arr
+      },
+      randomBlockNumber () {
+        return Math.floor(Math.random() * (blocks.length - 0))
       }
     },
     computed: {

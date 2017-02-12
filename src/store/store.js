@@ -4,7 +4,8 @@ import { atEdge,
   atBottom,
   onAnotherBlock,
   occupiedByCurrentBlock,
-  indOf
+  indOf,
+  canMove
 } from './storeHelpers'
 
 Vue.use(Vuex)
@@ -29,7 +30,8 @@ export const mutations = {
     state.currentBlock = block
   },
   MOVE_CURRENT_BLOCK (state, direction) {
-    if (atEdge(direction, state.board[0].length, state.currentBlock)) {
+    if (atEdge(direction, state.board[0].length, state.currentBlock) &&
+      !canMove(direction, state.board[0], state.currentBlock)) {
       return
     }
     let updatedCurrentBlock = []
