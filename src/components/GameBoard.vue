@@ -13,7 +13,7 @@
 
   export default {
     created () {
-      let block = blocks[2]
+      let block = blocks[5]
       this.$store.commit('SETUP_BOARD', this.createArray(15, 10))
       this.$store.commit('CREATE_BLOCK', block)
       this.$store.commit('SET_CURRENT_BLOCK', block)
@@ -24,7 +24,7 @@
       lower () {
         if (this.$store.state.shouldCreateNextBlock) {
           // let block = [ [1, 0], [1, 1], [1, 2] ]
-          let block = blocks[2]
+          let block = blocks[5]
           this.$store.commit('CREATE_BLOCK', block)
           this.$store.commit('SET_CURRENT_BLOCK', block)
         }

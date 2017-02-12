@@ -56,6 +56,31 @@ describe('LOWER_CURRENT_BLOCK', () => {
     ])
   })
 
+  it('should not lower a Z shaped block already on the ground', () => {
+    let state = {
+      board: [
+        [ 0, 0 ],
+        [ 0, 0 ],
+        [ 0, 0 ]
+      ]
+    }
+    let block = [
+      [ 0, 1 ],
+      [ 1, 0 ],
+      [ 1, 1 ],
+      [ 2, 0 ]
+    ]
+    CREATE_BLOCK(state, block)
+    SET_CURRENT_BLOCK(state, block)
+    LOWER_CURRENT_BLOCK(state)
+
+    expect(state.board).to.eql([
+      [ 0, 1 ],
+      [ 1, 1 ],
+      [ 1, 0 ]
+    ])
+  })
+
   it('should not be lowered if sitting on another block', () => {
     let block = [ [0, 0] ]
     let state = {
@@ -77,6 +102,37 @@ describe('LOWER_CURRENT_BLOCK', () => {
 })
 
 describe('MOVE_CURRENT_BLOCK', () => {
+  it('moves a Z shape block one space to the right', () => {
+    let state = {
+      board: [
+        [ 0, 0, 0 ],
+        [ 0, 0, 0 ],
+        [ 0, 0, 0 ]
+      ]
+    }
+    let block = [
+      [ 0, 0 ],
+      [ 1, 0 ],
+      [ 1, 1 ],
+      [ 2, 1 ]
+    ]
+    CREATE_BLOCK(state, block)
+    SET_CURRENT_BLOCK(state, block)
+    MOVE_CURRENT_BLOCK(state, 'right')
+
+    expect(state.board).to.eql([
+      [ 0, 1, 0 ],
+      [ 0, 1, 1 ],
+      [ 0, 0, 1 ]
+    ])
+    expect(state.currentBlock).to.eql([
+      [ 0, 1 ],
+      [ 1, 1 ],
+      [ 1, 2 ],
+      [ 2, 2 ]
+    ])
+  })
+
   it('moves the block one space to the right', () => {
     let state = {
       board: [

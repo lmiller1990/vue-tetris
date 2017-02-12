@@ -19,10 +19,12 @@ function atBottom (board, currentBlock) {
   let curr = getBlockLowestPoints(currentBlock)
   for (let c in curr) {
     if (curr[c][0] < board.length - 1) {
-      return false
+      // do nothing
+    } else {
+      return true // it is on the bottom
     }
   }
-  return true
+  return false
 }
 
 function onAnotherBlock (board, currentBlock) {

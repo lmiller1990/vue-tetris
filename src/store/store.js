@@ -32,8 +32,8 @@ export const mutations = {
     if (atEdge(direction, state.board[0].length, state.currentBlock)) {
       return
     }
-    let toFill = []
     let updatedCurrentBlock = []
+    let movedTo = []
 
     for (let t in state.currentBlock) {
       let oldY = state.currentBlock[t][0]
@@ -44,14 +44,13 @@ export const mutations = {
       } else {
         newX = state.currentBlock[t][1] - 1
       }
-      toFill.push(newX)
 
-      if (!toFill.includes(oldX)) {
+      if (indOf([oldY, oldX], movedTo) === -1) {
         state.board[oldY].splice(oldX, 1, 0)
       }
-
       state.board[oldY].splice(newX, 1, 1)
 
+      movedTo.push([oldY, newX])
       updatedCurrentBlock.push([oldY, newX])
     }
     state.currentBlock = updatedCurrentBlock
