@@ -18,10 +18,10 @@ describe('onAnotherBlock', () => {
 describe('canMove', () => {
   it('allows a Z block to right', () => {
     let board = [
-        [ 0, 0, 0, 0 ],
-        [ 0, 0, 0, 0 ],
-        [ 0, 0, 0, 1 ]
-      ]
+      [ 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0 ],
+      [ 0, 0, 0, 1 ]
+    ]
     let block = [
       [ 0, 0 ],
       [ 1, 0 ],
@@ -31,7 +31,7 @@ describe('canMove', () => {
 
     expect(helpers.canMove('right', board, block)).to.equal(true)
   })
-  
+
   it('allows a flat block to move right', () => {
     let board = [ [ 0, 0, 0 ] ]
     let block = [ [0, 0], [0, 1] ]
@@ -40,10 +40,10 @@ describe('canMove', () => {
   })
   it('disallows a Z block to right', () => {
     let board = [
-        [ 0, 0, 0, 0 ],
-        [ 0, 0, 0, 0 ],
-        [ 0, 0, 0, 1 ]
-      ]
+      [ 0, 0, 0, 0 ],
+      [ 0, 0, 0, 0 ],
+      [ 0, 0, 0, 1 ]
+    ]
     let block = [
       [ 0, 1 ],
       [ 1, 1 ],

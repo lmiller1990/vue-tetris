@@ -2,7 +2,6 @@ import { mutations } from 'src/store/store'
 
 const { MOVE_CURRENT_BLOCK,
   SET_CURRENT_BLOCK,
-  LOWER_CURRENT_BLOCK,
   CREATE_BLOCK
 } = mutations
 

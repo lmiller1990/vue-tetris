@@ -81,42 +81,42 @@ function indOf (o, arr) {
 
 function getLeftmostPoints (block) {
   let cols = []
-  let low = []
+  let left = []
   for (let b in block) {
     if (!cols.includes(block[b][0])) {
       cols.push(block[b][0])
-      low.push(block[b])
+      left.push(block[b])
     } else {
       for (let i in cols) {
-        if (low[i][0] === block[b][0]) {
-          if (low[i][1] > block[b][1]) {
-            low.splice(i, 1, block[b])
+        if (left[i][0] === block[b][0]) {
+          if (left[i][1] > block[b][1]) {
+            left.splice(i, 1, block[b])
           }
         }
       }
     }
   }
-  return low
+  return left
 }
 
 function getRightmostPoints (block) {
   let cols = []
-  let low = []
+  let right = []
   for (let b in block) {
     if (!cols.includes(block[b][0])) {
       cols.push(block[b][0])
-      low.push(block[b])
+      right.push(block[b])
     } else {
       for (let i in cols) {
-        if (low[i][0] === block[b][0]) {
-          if (low[i][1] < block[b][1]) {
-            low.splice(i, 1, block[b])
+        if (right[i][0] === block[b][0]) {
+          if (right[i][1] < block[b][1]) {
+            right.splice(i, 1, block[b])
           }
         }
       }
     }
   }
-  return low
+  return right
 }
 
 function getBlockLowestPoints (block) {
