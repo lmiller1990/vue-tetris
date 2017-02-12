@@ -30,32 +30,33 @@ export const mutations = {
     state.currentBlock = block
   },
   MOVE_CURRENT_BLOCK (state, direction) {
-    if (atEdge(direction, state.board[0].length, state.currentBlock) &&
-      !canMove(direction, state.board[0], state.currentBlock)) {
+    if (atEdge(direction, state.board[0].length, state.currentBlock)) {
       return
     }
-    let updatedCurrentBlock = []
-    let movedTo = []
+    if (canMove(direction, state.board, state.currentBlock)) {
+      let updatedCurrentBlock = []
+      let movedTo = []
 
-    for (let t in state.currentBlock) {
-      let oldY = state.currentBlock[t][0]
-      let oldX = state.currentBlock[t][1]
-      let newX = 0
-      if (direction === 'right') {
-        newX = state.currentBlock[t][1] + 1
-      } else {
-        newX = state.currentBlock[t][1] - 1
+      for (let t in state.currentBlock) {
+        let oldY = state.currentBlock[t][0]
+        let oldX = state.currentBlock[t][1]
+        let newX = 0
+        if (direction === 'right') {
+          newX = state.currentBlock[t][1] + 1
+        } else {
+          newX = state.currentBlock[t][1] - 1
+        }
+
+        if (indOf([oldY, oldX], movedTo) === -1) {
+          state.board[oldY].splice(oldX, 1, 0)
+        }
+        state.board[oldY].splice(newX, 1, 1)
+
+        movedTo.push([oldY, newX])
+        updatedCurrentBlock.push([oldY, newX])
       }
-
-      if (indOf([oldY, oldX], movedTo) === -1) {
-        state.board[oldY].splice(oldX, 1, 0)
-      }
-      state.board[oldY].splice(newX, 1, 1)
-
-      movedTo.push([oldY, newX])
-      updatedCurrentBlock.push([oldY, newX])
+      state.currentBlock = updatedCurrentBlock
     }
-    state.currentBlock = updatedCurrentBlock
   },
   LOWER_CURRENT_BLOCK (state) {
     let movedTo = []

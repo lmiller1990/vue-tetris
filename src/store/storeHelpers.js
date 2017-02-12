@@ -15,19 +15,20 @@ function atEdge (direction, boardWidth, currentBlock) {
   return false
 }
 
-function canMove (direction, board, curr) {
+function canMove (direction, board, currentBlock) {
   if (direction === 'right') {
+    let curr = getRightmostPoints(currentBlock)
     for (let c in curr) {
       if (board[curr[c][0]][curr[c][1] + 1] === 0) {
-        // nothing
+        // can move - do nothing
       } else {
         return false
       }
     }
-  } else {
-    // left
+  } else if (direction === 'left') {
+    let curr = getLeftmostPoints(currentBlock)
     for (let c in curr) {
-      if (board[curr[c][0]][curr[c][1] - 1 === 0]) {
+      if (board[curr[c][0]][curr[c][1] - 1] === 0) {
         // nothing
       } else {
         return false
@@ -76,6 +77,46 @@ function indOf (o, arr) {
     }
   }
   return -1
+}
+
+function getLeftmostPoints (block) {
+  let cols = []
+  let low = []
+  for (let b in block) {
+    if (!cols.includes(block[b][0])) {
+      cols.push(block[b][0])
+      low.push(block[b])
+    } else {
+      for (let i in cols) {
+        if (low[i][0] === block[b][0]) {
+          if (low[i][1] > block[b][1]) {
+            low.splice(i, 1, block[b])
+          }
+        }
+      }
+    }
+  }
+  return low
+}
+
+function getRightmostPoints (block) {
+  let cols = []
+  let low = []
+  for (let b in block) {
+    if (!cols.includes(block[b][0])) {
+      cols.push(block[b][0])
+      low.push(block[b])
+    } else {
+      for (let i in cols) {
+        if (low[i][0] === block[b][0]) {
+          if (low[i][1] < block[b][1]) {
+            low.splice(i, 1, block[b])
+          }
+        }
+      }
+    }
+  }
+  return low
 }
 
 function getBlockLowestPoints (block) {

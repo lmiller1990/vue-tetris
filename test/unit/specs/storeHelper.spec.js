@@ -31,6 +31,13 @@ describe('canMove', () => {
 
     expect(helpers.canMove('right', board, block)).to.equal(true)
   })
+  
+  it('allows a flat block to move right', () => {
+    let board = [ [ 0, 0, 0 ] ]
+    let block = [ [0, 0], [0, 1] ]
+
+    expect(helpers.canMove('right', board, block)).to.equal(true)
+  })
   it('disallows a Z block to right', () => {
     let board = [
         [ 0, 0, 0, 0 ],
