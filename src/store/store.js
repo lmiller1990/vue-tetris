@@ -44,6 +44,7 @@ export const mutations = {
         // splice all current
         state.board[next[n][0]].splice(next[n][1], 1, 1)
       }
+      state.currentBlock.rotIndex += 1
     }
   },
   MOVE_CURRENT_BLOCK (state, direction) {
@@ -87,9 +88,6 @@ export const mutations = {
         let newY = curr[t][0] + 1
         let oldX = curr[t][1]
 
-        /* if (!occupiedByCurrentBlock([newY, oldX], state.currentBlock)) {
-        } */
-
         if (indOf([oldY, oldX], movedTo) === -1) {
           state.board[oldY].splice(oldX, 1, 0)
         }
@@ -99,6 +97,18 @@ export const mutations = {
         updatedCurrentBlock.push([newY, oldX])
       }
       state.currentBlock.rotations[state.currentBlock.rotIndex] = updatedCurrentBlock
+      let rot = state.currentBlock.rotIndex
+      console.log(`Current rotation index is ${state.currentBlock.rotIndex}`)
+      for (let r in state.currentBlock.rotations) {
+        if (parseInt(r) !== parseInt(rot)) {
+          console.log(`Update ${r}`)
+          for (let b in state.currentBlock.rotations[r]) {
+            console.log(`Incrementing ${state.currentBlock.rotations[r][b]}`)
+            state.currentBlock.rotations[r][b][0] += 1
+            b + 1 - 1
+          }
+        }
+      }
     } else {
       state.shouldCreateNextBlock = true
     }
