@@ -15,7 +15,38 @@ function atEdge (direction, boardWidth, currentBlock) {
   return false
 }
 
+function getNextRotation (curr) {
+  let next
+  if (curr.rotIndex < 3) {
+    next = curr.rotations[curr.rotIndex + 1]
+  } else {
+    next = curr.rotations[0]
+  }
+  return next
+}
+
 function canRotate (curr, board) {
+  let next = getNextRotation(curr)
+  for (let n in next) {
+    if (next[n][0] <= board.length) {
+      // nothing
+    } else {
+      console.log(`Too low with next[n][0] = ${next[n][0]}, length = ${board.length}`)
+      return false
+    }
+
+    if (next[n][1] < board[0].length && next[n][1] >= 0) {
+      console.log(`next[n][1] = ${next[n][1]} board[0].length = ${board[0].length}`)
+      // nothing
+    } else {
+      console.log(next[n][1], board[0].length - 1)
+      console.log('Too far to the side')
+
+      console.log(`next[n][1] = ${next[n][1]} board[0].length = ${board[0].length}`)
+      return false
+    }
+    // state.board[next[n][0]].splice(next[n][1], 1, 1)
+  }
   return true
 }
 
@@ -150,5 +181,6 @@ export { atEdge,
   occupiedByCurrentBlock,
   indOf,
   canMove,
-  canRotate
+  canRotate,
+  getNextRotation
 }

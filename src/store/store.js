@@ -5,7 +5,8 @@ import { atEdge,
   onAnotherBlock,
   indOf,
   canMove,
-  canRotate
+  canRotate,
+  getNextRotation
 } from './storeHelpers'
 
 Vue.use(Vuex)
@@ -33,12 +34,7 @@ export const mutations = {
   ROTATE_CURRENT_BLOCK (state) {
     if (canRotate(state.currentBlock, state.board)) {
       let curr = state.currentBlock.rotations[state.currentBlock.rotIndex]
-      let next = 0
-      if (state.currentBlock.rotIndex < 3) {
-        next = state.currentBlock.rotations[state.currentBlock.rotIndex + 1]
-      } else {
-        next = state.currentBlock.rotations[0]
-      }
+      let next = getNextRotation(state.currentBlock)
 
       for (let c in curr) {
         // splice all current
@@ -54,7 +50,6 @@ export const mutations = {
       } else {
         state.currentBlock.rotIndex = 0
       }
-      console.log(`Current rotation index is ${state.currentBlock.rotIndex}`)
     }
   },
   MOVE_CURRENT_BLOCK (state, direction) {
