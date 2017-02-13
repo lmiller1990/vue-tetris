@@ -47,4 +47,22 @@ describe('ROTATE_CURRENT_BLOCK', () => {
       [ 1, 1 ]
     ])
   })
+  it('does not allow a L block to rotate through the fllor', () => {
+    let block = blocks[1]
+    block.rotIndex = 3
+    let state = {
+      board: [
+        [ 0, 0, 0 ],
+        [ 0, 0, 0 ]
+      ]
+    }
+    CREATE_BLOCK(state, block)
+    SET_CURRENT_BLOCK(state, block)
+    ROTATE_CURRENT_BLOCK(state)
+
+    expect(state.board).to.eql([
+        [ 0, 0, 1 ],
+        [ 1, 1, 1 ]
+    ])
+  })
 })

@@ -28,24 +28,19 @@ function getNextRotation (curr) {
 function canRotate (curr, board) {
   let next = getNextRotation(curr)
   for (let n in next) {
-    if (next[n][0] <= board.length) {
+    // check not out of the bottom
+    if (next[n][0] < board.length) {
       // nothing
     } else {
-      console.log(`Too low with next[n][0] = ${next[n][0]}, length = ${board.length}`)
       return false
     }
 
+    // check LHS and RHS bounds
     if (next[n][1] < board[0].length && next[n][1] >= 0) {
-      console.log(`next[n][1] = ${next[n][1]} board[0].length = ${board[0].length}`)
       // nothing
     } else {
-      console.log(next[n][1], board[0].length - 1)
-      console.log('Too far to the side')
-
-      console.log(`next[n][1] = ${next[n][1]} board[0].length = ${board[0].length}`)
       return false
     }
-    // state.board[next[n][0]].splice(next[n][1], 1, 1)
   }
   return true
 }
