@@ -24,9 +24,9 @@
     methods: {
       lower () {
         if (this.$store.state.shouldCreateNextBlock) {
-          // let block = blocks[this.randomBlockNumber()]
-          // this.$store.commit('CREATE_BLOCK', block)
-          // this.$store.commit('SET_CURRENT_BLOCK', block)
+          let block = blocks[this.randomBlockNumber()]
+          this.$store.commit('CREATE_BLOCK', block)
+          this.$store.commit('SET_CURRENT_BLOCK', block)
         }
         this.$store.commit('LOWER_CURRENT_BLOCK')
       },
