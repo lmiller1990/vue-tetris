@@ -9,6 +9,7 @@ const { ROTATE_CURRENT_BLOCK,
 describe('ROTATE_CURRENT_BLOCK', () => {
   it('rotates an L block', () => {
     let block = blocks[1]
+    block.rotIndex = 0
     let state = {
       board: [
         [ 0, 0, 0 ],
@@ -67,6 +68,7 @@ describe('ROTATE_CURRENT_BLOCK', () => {
   })
   it('does not allow an L block to rotate through another block', () => {
     let block = blocks[1]
+    block.rotIndex = 0
     let state = {
       board: [
         [ 0, 0, 1 ],

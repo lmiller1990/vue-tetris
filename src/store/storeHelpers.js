@@ -1,3 +1,5 @@
+// import cloneDeep from 'clone-deep'
+
 function atEdge (direction, boardWidth, currentBlock) {
   if (direction === 'right') {
     for (let c in currentBlock) {
@@ -27,6 +29,11 @@ function getNextRotation (curr) {
 
 function canRotate (curr, board) {
   let next = getNextRotation(curr)
+  let boardClone = JSON.parse(JSON.stringify(board))
+  let currRot = curr.rotations[curr.rotIndex]
+  for (let n in currRot) {
+    boardClone[currRot[n][0]].splice(currRot[n][1], 1, 0)
+  }
   for (let n in next) {
     // check not out of the bottom
     if (next[n][0] < board.length) {
@@ -39,6 +46,14 @@ function canRotate (curr, board) {
     if (next[n][1] < board[0].length && next[n][1] >= 0) {
       // nothing
     } else {
+      return false
+    }
+
+    // check for other blocks
+    if (boardClone[next[n][0]][next[n][1]] === 1) {
+      console.log(boardClone)
+      console.log(next)
+      console.log(`boardClone ${next[n][0]}, ${next[n][1]} is taken`)
       return false
     }
   }
