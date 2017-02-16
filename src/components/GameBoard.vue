@@ -14,7 +14,7 @@
   export default {
     created () {
       // let block = blocks[this.randomBlockNumber()]
-      let block = blocks[1]
+      let block = JSON.parse(JSON.stringify(blocks[6]))
       this.$store.commit('SETUP_BOARD', this.createArray(15, 10))
       this.$store.commit('CREATE_BLOCK', block)
       this.$store.commit('SET_CURRENT_BLOCK', block)
@@ -24,7 +24,9 @@
     methods: {
       lower () {
         if (this.$store.state.shouldCreateNextBlock) {
-          let block = blocks[this.randomBlockNumber()]
+          // let block = blocks[this.randomBlockNumber()]
+          let block = JSON.parse(JSON.stringify(blocks[3]))
+          console.log(block)
           this.$store.commit('CREATE_BLOCK', block)
           this.$store.commit('SET_CURRENT_BLOCK', block)
         }
