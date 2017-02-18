@@ -1,5 +1,6 @@
 export default [
   { // 1. flat block
+    id: 0,
     name: 'I',
     rotIndex: 0,
     rotations: [
@@ -30,6 +31,7 @@ export default [
     ]
   },
   { // 2. L block
+    id: 1,
     name: 'L',
     rotIndex: 0,
     rotations: [
@@ -60,6 +62,7 @@ export default [
     ]
   },
   { // 3. Z block
+    id: 2,
     name: 'Z',
     rotIndex: 0,
     rotations: [
@@ -90,6 +93,7 @@ export default [
     ]
   },
   { // 4. S block
+    id: 3,
     name: 'S',
     rotIndex: 0,
     rotations: [
@@ -120,6 +124,7 @@ export default [
     ]
   },
   { // 5. L block
+    id: 4,
     name: 'J',
     rotIndex: 0,
     rotations: [
@@ -150,6 +155,7 @@ export default [
     ]
   },
   { // 6. O block
+    id: 5,
     name: 'O',
     rotIndex: 0,
     rotations: [
@@ -180,6 +186,7 @@ export default [
     ]
   },
   { // 7. T block
+    id: 6,
     name: 'T',
     rotIndex: 0,
     rotations: [

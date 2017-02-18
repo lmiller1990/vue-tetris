@@ -13,8 +13,6 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {
-    "clone-deep": "^0.2.4",
-    "underscore": "^1.8.3",
     "vue": "^2.1.10",
     "vuex": "^2.1.1"
   },

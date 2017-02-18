@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import blocks from '../blocks'
 import { atEdge,
   atBottom,
   onAnotherBlock,
@@ -126,13 +127,29 @@ export const mutations = {
         }
       }
     } else {
-      state.shouldCreateNextBlock = true
+      let curr = state.currentBlock
+      let lowering = curr.rotations[curr.rotIndex]
+      let original = blocks[curr.id].rotations[curr.rotIndex]
+      let moved = false
+      for (let y in lowering) {
+        for (let x in lowering[y]) {
+          if (lowering[y][x] !== original[y][x]) {
+            moved = true
+          }
+        }
+      }
+      if (!moved) {
+        console.log('Game over')
+      } else {
+        state.shouldCreateNextBlock = true
+      }
     }
   },
   DELETE_LINE_IF_COMPLETE (state, lineNumber) {
     if (lineCompleted(state.board[lineNumber])) {
+      // delete line
       state.board.splice(lineNumber, 1)
-
+      // add new line at the start
       let newLine = new Array(state.board[0].length).fill(0)
       state.board.unshift(newLine)
     }
