@@ -1,5 +1,3 @@
-// import cloneDeep from 'clone-deep'
-
 function atEdge (direction, boardWidth, currentBlock) {
   if (direction === 'right') {
     for (let c in currentBlock) {
@@ -13,6 +11,13 @@ function atEdge (direction, boardWidth, currentBlock) {
         return true
       }
     }
+  }
+  return false
+}
+
+function lineCompleted (line) {
+  if (!line.includes(0)) {
+    return true
   }
   return false
 }
@@ -192,5 +197,6 @@ export { atEdge,
   indOf,
   canMove,
   canRotate,
-  getNextRotation
+  getNextRotation,
+  lineCompleted
 }

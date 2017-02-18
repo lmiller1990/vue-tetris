@@ -24,11 +24,15 @@
     methods: {
       lower () {
         if (this.$store.state.shouldCreateNextBlock) {
-          let block = JSON.parse(JSON.stringify(blocks[this.randomBlockNumber()]))
+          // let block = JSON.parse(JSON.stringify(blocks[this.randomBlockNumber()]))
+          let block = JSON.parse(JSON.stringify(blocks[0]))
           this.$store.commit('CREATE_BLOCK', block)
           this.$store.commit('SET_CURRENT_BLOCK', block)
         }
         this.$store.commit('LOWER_CURRENT_BLOCK')
+        for (let l in this.$store.state.board) {
+          this.$store.commit('DELETE_LINE_IF_COMPLETE', l)
+        }
       },
       createArray (length) {
         let arr = new Array(length || 0).fill(0)

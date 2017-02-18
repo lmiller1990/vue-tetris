@@ -6,7 +6,8 @@ import { atEdge,
   indOf,
   canMove,
   canRotate,
-  getNextRotation
+  getNextRotation,
+  lineCompleted
 } from './storeHelpers'
 
 Vue.use(Vuex)
@@ -126,6 +127,14 @@ export const mutations = {
       }
     } else {
       state.shouldCreateNextBlock = true
+    }
+  },
+  DELETE_LINE_IF_COMPLETE (state, lineNumber) {
+    if (lineCompleted(state.board[lineNumber])) {
+      state.board.splice(lineNumber, 1)
+
+      let newLine = new Array(state.board[0].length).fill(0)
+      state.board.unshift(newLine)
     }
   }
 }

@@ -15,8 +15,15 @@ describe('onAnotherBlock', () => {
         ]
       ]
     }
-
     expect(helpers.onAnotherBlock(board, currentBlock)).to.equal(true)
+  })
+})
+
+describe('lineCompleted', () => {
+  it('returns true if a line is completed', () => {
+    let line = [ 1, 1, 1 ]
+
+    expect(helpers.lineCompleted(line)).to.equal(true)
   })
 })
 
