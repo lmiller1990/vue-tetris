@@ -1,8 +1,12 @@
 <template>
   <div>
     <div class="line" v-for="line in board"> 
+      <!--<Tile v-for="tile in line" :tile="tile"></Tile>-->
       <div :class="[tile == 1 ? 'filled tile' : 'empty tile' ]" v-for="tile in line">
       </div>
+    </div>
+    <div class="line" v-for="(line, y) in board"> 
+      <Tile v-for="(tile, x) in line" :y="y" :x="x" :tile="tile"></Tile>
     </div>
     <div class="score">
       Score: {{ $store.state.score }}
@@ -18,8 +22,12 @@
 <script>
   import { mapState } from 'vuex'
   import blocks from '../blocks'
+  import Tile from './Tile'
 
   export default {
+    components: {
+      Tile
+    },
     created () {
       // let block = blocks[this.randomBlockNumber()]
       let block = JSON.parse(JSON.stringify(blocks[this.randomBlockNumber()]))
@@ -27,7 +35,7 @@
       this.$store.commit('CREATE_BLOCK', block)
       this.$store.commit('SET_CURRENT_BLOCK', block)
 
-      setInterval(this.lower, 200)
+      setInterval(this.lower, 5000)
     },
     methods: {
       lower () {
@@ -68,6 +76,15 @@
 </script>
 
 <style scoped>
+  .restart.button {
+    border: 0.125em solid black;
+    display: inline-block;
+  }
+
+  .score {
+    display: inline-block;
+    font-size: 1.5em;
+  }
   .tile {
     display: inline-block;
     width: 1.5em;
@@ -78,15 +95,5 @@
 
   .filled {
     background-color: grey;
-  }
-
-  .restart.button {
-    border: 0.125em solid black;
-    display: inline-block;
-  }
-
-  .score {
-    display: inline-block;
-    font-size: 1.5em;
   }
 </style>

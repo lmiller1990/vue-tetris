@@ -104,6 +104,11 @@ export const mutations = {
     let updatedCurrentBlock = []
     let curr = state.currentBlock.rotations[state.currentBlock.rotIndex]
 
+    console.log('---------')
+    for (let y in curr) {
+      console.log(`Current: x: ${curr[y][1]} y: ${curr[y][0]}`)
+    }
+
     if (!atBottom(state.board, state.currentBlock) &&
       !onAnotherBlock(state.board, state.currentBlock)) {
       for (let t in curr) {
@@ -172,7 +177,6 @@ const actions = {
 }
 
 const getters = {
-
 }
 
 export default new Vuex.Store({
