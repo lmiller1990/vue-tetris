@@ -29,8 +29,8 @@
     methods: {
       lower () {
         if (this.$store.state.shouldCreateNextBlock) {
-          // let block = JSON.parse(JSON.stringify(blocks[this.randomBlockNumber()]))
-          let block = JSON.parse(JSON.stringify(blocks[0]))
+          let block = JSON.parse(JSON.stringify(blocks[this.randomBlockNumber()]))
+          // let block = JSON.parse(JSON.stringify(blocks[0]))
           this.$store.commit('CREATE_BLOCK', block)
           this.$store.commit('SET_CURRENT_BLOCK', block)
         }

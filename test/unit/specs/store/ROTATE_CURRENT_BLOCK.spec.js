@@ -14,6 +14,7 @@ describe('ROTATE_CURRENT_BLOCK', () => {
       board: [
         [ 0, 0, 0 ],
         [ 0, 0, 0 ],
+        [ 0, 0, 0 ],
         [ 0, 0, 0 ]
       ]
     }
@@ -21,11 +22,11 @@ describe('ROTATE_CURRENT_BLOCK', () => {
     SET_CURRENT_BLOCK(state, block)
     ROTATE_CURRENT_BLOCK(state)
 
-    console.log(state.board)
     expect(state.board).to.eql([
       [ 0, 0, 0 ],
       [ 1, 1, 1 ],
-      [ 1, 0, 0 ]
+      [ 1, 0, 0 ],
+      [ 0, 0, 0 ]
     ])
   })
   it('does not allow a L block to rotate if it would go out of bounds', () => {

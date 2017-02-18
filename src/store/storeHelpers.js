@@ -33,6 +33,11 @@ function getNextRotation (curr) {
 }
 
 function canRotate (curr, board) {
+  // first check if it not already stationary
+  if (atBottom(board, curr) || onAnotherBlock(board, curr)) {
+    return false
+  }
+
   let next = getNextRotation(curr)
   let boardClone = JSON.parse(JSON.stringify(board))
   let currRot = curr.rotations[curr.rotIndex]
@@ -56,9 +61,6 @@ function canRotate (curr, board) {
 
     // check for other blocks
     if (boardClone[next[n][0]][next[n][1]] === 1) {
-      console.log(boardClone)
-      console.log(next)
-      console.log(`boardClone ${next[n][0]}, ${next[n][1]} is taken`)
       return false
     }
   }
@@ -121,7 +123,6 @@ function occupiedByCurrentBlock (point, currBlock) {
 
 function indOf (o, arr) {
   for (let i = 0; i < arr.length; i++) {
-    // console.log(`Comparing ${o[0]} and ${arr[i][0]}, and ${o[1]} and ${arr[i][1]}`)
     if (arr[i][0] === o[0] && arr[i][1] === o[1]) {
       return i
     }
