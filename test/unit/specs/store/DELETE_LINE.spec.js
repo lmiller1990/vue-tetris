@@ -9,7 +9,8 @@ describe('DELETE_LINE_IF_COMPLETED', () => {
         [ 0, 0, 0, 0 ],
         [ 0, 1, 1, 1 ],
         [ 1, 1, 1, 1 ]
-      ]
+      ],
+      score: 0
     }
     for (let l in state.board) {
       DELETE_LINE_IF_COMPLETE(state, l)
@@ -20,5 +21,6 @@ describe('DELETE_LINE_IF_COMPLETED', () => {
       [ 0, 0, 0, 0 ],
       [ 0, 1, 1, 1 ]
     ])
+    expect(state.score).to.equal(1)
   })
 })

@@ -4,6 +4,9 @@
       <div :class="[tile == 1 ? 'filled tile' : 'empty tile' ]" v-for="tile in line">
       </div>
     </div>
+    <div class="score">
+      Score: {{ $store.state.score }}
+    </div>
     <div v-if="$store.state.gameOver">
       <button class="restart button" @click="restart">
         Restart
@@ -78,6 +81,12 @@
   }
 
   .restart.button {
-    border: 0.25em solid black;
+    border: 0.125em solid black;
+    display: inline-block;
+  }
+
+  .score {
+    display: inline-block;
+    font-size: 1.5em;
   }
 </style>

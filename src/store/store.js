@@ -17,7 +17,8 @@ const state = {
   board: [],
   currentBlock: { },
   shouldCreateNextBlock: true,
-  gameOver: false
+  gameOver: false,
+  score: 0
 }
 
 export const mutations = {
@@ -153,6 +154,7 @@ export const mutations = {
       // add new line at the start
       let newLine = new Array(state.board[0].length).fill(0)
       state.board.unshift(newLine)
+      state.score += 1
     }
   },
   RESTART_GAME (state) {
@@ -161,6 +163,7 @@ export const mutations = {
     }
     state.gameOver = false
     state.shouldCreateNextBlock = true
+    state.score = 0
   }
 }
 

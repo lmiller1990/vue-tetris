@@ -11,7 +11,8 @@ describe('RESTART_GAME', () => {
       ],
       currentBlock: { rotIndex: 1 },
       gameOver: true,
-      shouldCreateNextBlock: false
+      shouldCreateNextBlock: false,
+      score: 21
     }
     RESTART_GAME(state)
 
@@ -21,5 +22,6 @@ describe('RESTART_GAME', () => {
     ])
     expect(state.gameOver).to.equal(false)
     expect(state.shouldCreateNextBlock).to.equal(true)
+    expect(state.score).to.equal(0)
   })
 })
