@@ -1,4 +1,5 @@
 import { mutations } from 'src/store/store'
+import blocks from 'src/blocks'
 
 const {
   SET_CURRENT_BLOCK,
@@ -15,17 +16,7 @@ describe('LOWER_CURRENT_BLOCK', () => {
         [ 0, 0 ]
       ]
     }
-    let block = {
-      rotIndex: 0,
-      rotations: [
-        [
-          [0, 0],
-          [0, 1],
-          [1, 0],
-          [1, 1]
-        ]
-      ]
-    }
+    let block = JSON.parse(JSON.stringify(blocks[5]))
     CREATE_BLOCK(state, block)
     SET_CURRENT_BLOCK(state, block)
     LOWER_CURRENT_BLOCK(state)
@@ -45,7 +36,7 @@ describe('LOWER_CURRENT_BLOCK', () => {
     ])
   })
 
-  it('should not lower a Z shaped block already on the ground', () => {
+  it('should not lower a S shaped block already on the ground', () => {
     let state = {
       board: [
         [ 0, 0 ],
@@ -53,17 +44,7 @@ describe('LOWER_CURRENT_BLOCK', () => {
         [ 0, 0 ]
       ]
     }
-    let block = {
-      rotIndex: 0,
-      rotations: [
-        [
-          [ 0, 1 ],
-          [ 1, 0 ],
-          [ 1, 1 ],
-          [ 2, 0 ]
-        ]
-      ]
-    }
+    let block = JSON.parse(JSON.stringify(blocks[3]))
     CREATE_BLOCK(state, block)
     SET_CURRENT_BLOCK(state, block)
     LOWER_CURRENT_BLOCK(state)
@@ -76,28 +57,23 @@ describe('LOWER_CURRENT_BLOCK', () => {
   })
 
   it('should not be lowered if sitting on another block', () => {
-    let block = {
-      rotIndex: 0,
-      rotations: [
-        [
-          [0, 0]
-        ]
-      ]
-    }
+    let block = JSON.parse(JSON.stringify(blocks[5]))
+    block.rotIndex = 0
     let state = {
       board: [
-        [ 0 ],
-        [ 1 ]
-      ],
-      currentBlock: null
+        [ 0, 0 ],
+        [ 0, 0 ],
+        [ 1, 1 ]
+      ]
     }
     CREATE_BLOCK(state, block)
     SET_CURRENT_BLOCK(state, block)
     LOWER_CURRENT_BLOCK(state)
 
     expect(state.board).to.eql([
-      [ 1 ],
-      [ 1 ]
+      [ 1, 1 ],
+      [ 1, 1 ],
+      [ 1, 1 ]
     ])
   })
 })

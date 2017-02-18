@@ -2,7 +2,6 @@ import { mutations } from 'src/store/store'
 
 const { DELETE_LINE_IF_COMPLETE } = mutations
 
-
 describe('DELETE_LINE_IF_COMPLETED', () => {
   it('delets a line when it is completed', () => {
     let state = {

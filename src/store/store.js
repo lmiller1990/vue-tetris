@@ -16,7 +16,8 @@ Vue.use(Vuex)
 const state = {
   board: [],
   currentBlock: { },
-  shouldCreateNextBlock: true
+  shouldCreateNextBlock: true,
+  gameOver: false
 }
 
 export const mutations = {
@@ -127,9 +128,9 @@ export const mutations = {
         }
       }
     } else {
-      let curr = state.currentBlock
-      let lowering = curr.rotations[curr.rotIndex]
-      let original = blocks[curr.id].rotations[curr.rotIndex]
+      let current = state.currentBlock
+      let lowering = current.rotations[current.rotIndex]
+      let original = blocks[current.id].rotations[current.rotIndex]
       let moved = false
       for (let y in lowering) {
         for (let x in lowering[y]) {
@@ -139,7 +140,7 @@ export const mutations = {
         }
       }
       if (!moved) {
-        console.log('Game over')
+        state.gameOver = true
       } else {
         state.shouldCreateNextBlock = true
       }
@@ -153,6 +154,13 @@ export const mutations = {
       let newLine = new Array(state.board[0].length).fill(0)
       state.board.unshift(newLine)
     }
+  },
+  RESTART_GAME (state) {
+    for (let l in state.board) {
+      state.board.splice(l, 1, new Array(state.board[0].length).fill(0))
+    }
+    state.gameOver = false
+    state.shouldCreateNextBlock = true
   }
 }
 

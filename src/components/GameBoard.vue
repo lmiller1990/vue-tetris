@@ -4,6 +4,11 @@
       <div :class="[tile == 1 ? 'filled tile' : 'empty tile' ]" v-for="tile in line">
       </div>
     </div>
+    <div v-if="$store.state.gameOver">
+      <button class="restart button" @click="restart">
+        Restart
+      </button>
+    </div>
   </div>
 </template>
 
@@ -46,6 +51,9 @@
       },
       randomBlockNumber () {
         return Math.floor(Math.random() * (blocks.length - 0))
+      },
+      restart () {
+        this.$store.commit('RESTART_GAME')
       }
     },
     computed: {
@@ -69,4 +77,7 @@
     background-color: grey;
   }
 
+  .restart.button {
+    border: 0.25em solid black;
+  }
 </style>
