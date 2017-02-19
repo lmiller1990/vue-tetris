@@ -30,7 +30,6 @@ export default {
   methods: {
     keyUp (event) {
       if (event.code === 'ArrowDown') {
-        console.log('Down arrow released')
         clearInterval(this.intervalId)
         this.downKeyDown = false
       }
@@ -50,7 +49,6 @@ export default {
           this.intervalId = setInterval(this.lower, 25)
         }
         this.downKeyDown = true
-        console.log('Down arrow pressed')
       }
     },
     lower () {
