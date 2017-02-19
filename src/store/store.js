@@ -20,7 +20,8 @@ const state = {
   gameOver: false,
   score: 0,
   previousColorId: 0,
-  currentColorId: 0
+  currentColorId: 0,
+  lowerSpeed: 500
 }
 
 export const mutations = {
@@ -179,6 +180,14 @@ const actions = {
 
 const getters = {
   currentBlockTiles (state) {
+  },
+  canBeLowered (state) {
+    if (!atBottom(state.board, state.currentBlock) &&
+    !onAnotherBlock(state.board, state.currentBlock)) {
+      return true
+    } else {
+      return false
+    }
   }
 }
 

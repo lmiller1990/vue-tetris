@@ -1,14 +1,10 @@
 <template>
   <div>
-    <!--<div class="line" v-for="line in board"> 
-      <div :class="[tile == 1 ? 'filled tile' : 'empty tile' ]" v-for="tile in line">
-      </div>
-    </div>-->
     <div class="line" v-for="(line, y) in board"> 
       <Tile v-for="(tile, x) in line" :y="y" :x="x" :tile="tile"></Tile>
     </div>
     <div class="score">
-      Score: {{ $store.state.score }}
+      Score: {{ $store.state.score }} Fallspeed: {{ $store.state.lowerSpeed }}
     </div>
     <div v-if="$store.state.gameOver">
       <button class="restart button" @click="restart">
@@ -30,11 +26,11 @@
     created () {
       // let block = blocks[this.randomBlockNumber()]
       let block = JSON.parse(JSON.stringify(blocks[this.randomBlockNumber()]))
-      this.$store.commit('SETUP_BOARD', this.createArray(15, 10))
+      this.$store.commit('SETUP_BOARD', this.createArray(20, 10))
       this.$store.commit('CREATE_BLOCK', block)
       this.$store.commit('SET_CURRENT_BLOCK', block)
 
-      setInterval(this.lower, 300)
+      setInterval(this.lower, this.$store.state.lowerSpeed)
     },
     methods: {
       lower () {
@@ -45,7 +41,6 @@
           this.$store.commit('SET_CURRENT_BLOCK', block)
         }
         this.$store.commit('LOWER_CURRENT_BLOCK')
-        this.$store.getters.currentBlockTiles
         for (let l in this.$store.state.board) {
           this.$store.commit('DELETE_LINE_IF_COMPLETE', l)
         }
