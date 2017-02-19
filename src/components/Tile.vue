@@ -1,5 +1,5 @@
 <template>
-  <div class="tile" :style="tileStyle">{{ x }} {{ y }}</div>
+  <div class="tile" :style="tileStyle"><div>
 </template>
 
 <script>
@@ -8,7 +8,7 @@
     data () {
       return {
         tileColorSet: false,
-        tileColor: '',
+        tileColorId: '',
         colors: [
           'red',
           'blue',
@@ -41,11 +41,13 @@
             // set the tile color once.
             // this ensures tiles that are no longer moving maintain their color.
             if (!this.tileColorSet) {
-              this.tileColor = this.$store.state.previousColorId
+              this.tileColorId = this.$store.state.previousColorId
             }
             this.tileColorSet = true
-            return { backgroundColor: this.colors[this.tileColor] }
+            return { backgroundColor: this.colors[this.tileColorId] }
           }
+        } else {
+          this.tileColorSet = false
         }
       }
     }

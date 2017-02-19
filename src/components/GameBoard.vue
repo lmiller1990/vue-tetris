@@ -1,10 +1,9 @@
 <template>
   <div>
-    <div class="line" v-for="line in board"> 
-      <!--<Tile v-for="tile in line" :tile="tile"></Tile>-->
+    <!--<div class="line" v-for="line in board"> 
       <div :class="[tile == 1 ? 'filled tile' : 'empty tile' ]" v-for="tile in line">
       </div>
-    </div>
+    </div>-->
     <div class="line" v-for="(line, y) in board"> 
       <Tile v-for="(tile, x) in line" :y="y" :x="x" :tile="tile"></Tile>
     </div>

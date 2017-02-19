@@ -169,6 +169,8 @@ export const mutations = {
     state.gameOver = false
     state.shouldCreateNextBlock = true
     state.score = 0
+    state.previousColorId = 0
+    state.currentColorId = 0
   }
 }
 
