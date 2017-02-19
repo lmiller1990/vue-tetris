@@ -18,7 +18,9 @@ const state = {
   currentBlock: { },
   shouldCreateNextBlock: true,
   gameOver: false,
-  score: 0
+  score: 0,
+  previousColorId: 0,
+  currentColorId: 0
 }
 
 export const mutations = {
@@ -26,11 +28,13 @@ export const mutations = {
     state.board = gameBoard
   },
   CREATE_BLOCK (state, block) {
+    state.currentBlockNumber += 1
     let rot = block.rotations[block.rotIndex]
     for (let t in rot) {
       state.board[rot[t][0]][rot[t][1]] = 1
       state.shouldCreateNextBlock = false
     }
+    state.currentColorId = block.id
   },
   SET_CURRENT_BLOCK (state, block) {
     state.currentBlock = block
@@ -104,11 +108,6 @@ export const mutations = {
     let updatedCurrentBlock = []
     let curr = state.currentBlock.rotations[state.currentBlock.rotIndex]
 
-    console.log('---------')
-    for (let y in curr) {
-      console.log(`Current: x: ${curr[y][1]} y: ${curr[y][0]}`)
-    }
-
     if (!atBottom(state.board, state.currentBlock) &&
       !onAnotherBlock(state.board, state.currentBlock)) {
       for (let t in curr) {
@@ -148,6 +147,7 @@ export const mutations = {
       if (!moved) {
         state.gameOver = true
       } else {
+        state.previousColorId = current.id
         state.shouldCreateNextBlock = true
       }
     }
@@ -177,6 +177,8 @@ const actions = {
 }
 
 const getters = {
+  currentBlockTiles (state) {
+  }
 }
 
 export default new Vuex.Store({

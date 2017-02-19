@@ -35,7 +35,7 @@
       this.$store.commit('CREATE_BLOCK', block)
       this.$store.commit('SET_CURRENT_BLOCK', block)
 
-      setInterval(this.lower, 5000)
+      setInterval(this.lower, 100)
     },
     methods: {
       lower () {
@@ -46,6 +46,7 @@
           this.$store.commit('SET_CURRENT_BLOCK', block)
         }
         this.$store.commit('LOWER_CURRENT_BLOCK')
+        this.$store.getters.currentBlockTiles
         for (let l in this.$store.state.board) {
           this.$store.commit('DELETE_LINE_IF_COMPLETE', l)
         }

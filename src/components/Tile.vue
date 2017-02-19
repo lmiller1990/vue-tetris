@@ -7,6 +7,8 @@
     props: ['tile', 'x', 'y'],
     data () {
       return {
+        tileColorSet: false,
+        tileColor: '',
         colors: [
           'red',
           'blue',
@@ -18,24 +20,33 @@
         ]
       }
     },
-    computed: {
+    methods: {
       isCurrentBlockTile () {
-        let curr = this.$store.state.currentBlock
-        let c = curr.rotations[curr.rotIndex]
-
-        for (let y in c) {
-          if (c[y][1] === this.x && c[y][0] === this.y) {
+        let curr =
+          this.$store.state.currentBlock.rotations[this.$store.state.currentBlock.rotIndex]
+        for (let l in curr) {
+          if (curr[l][0] === this.y && curr[l][1] === this.x) {
             return true
           }
         }
-      },
+        return false
+      }
+    },
+    computed: {
       tileStyle () {
-        if (this.isCurrentBlockTile) {
-          return { backgroundColor: 'black' }
+        if (this.tile === 1) {
+          if (this.isCurrentBlockTile()) {
+            return { backgroundColor: this.colors[this.$store.state.currentColorId] }
+          } else {
+            // set the tile color once.
+            // this ensures tiles that are no longer moving maintain their color.
+            if (!this.tileColorSet) {
+              this.tileColor = this.$store.state.previousColorId
+            }
+            this.tileColorSet = true
+            return { backgroundColor: this.colors[this.tileColor] }
+          }
         }
-        return this.tile === 1
-          ? { backgroundColor: this.colors[this.$store.state.currentBlock.id] }
-          : {}
       }
     }
   }
