@@ -34,7 +34,7 @@
       this.$store.commit('CREATE_BLOCK', block)
       this.$store.commit('SET_CURRENT_BLOCK', block)
 
-      setInterval(this.lower, 100)
+      setInterval(this.lower, 300)
     },
     methods: {
       lower () {
