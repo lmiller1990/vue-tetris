@@ -28,7 +28,6 @@ export const mutations = {
     state.board = gameBoard
   },
   CREATE_BLOCK (state, block) {
-    state.currentBlockNumber += 1
     let rot = block.rotations[block.rotIndex]
     for (let t in rot) {
       state.board[rot[t][0]][rot[t][1]] = 1
