@@ -1,5 +1,5 @@
 <template>
-  <div class="tile" :style="tileStyle"><div>
+  <div class="tile" :style="tileStyle"></div>
 </template>
 
 <script>
@@ -66,4 +66,4 @@
   .filled {
     background-color: grey;
   }
-</scoped>
+</style>
